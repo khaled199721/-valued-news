@@ -99,16 +99,84 @@ export default async function Home({
         )}
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black text-white py-12 text-center">
-        <p>
-          Powered by <span className="font-semibold">Valued News</span>
-        </p>
-        <p className="mt-2 text-sm text-gray-400">
-          © 2026 Valued News. All rights reserved.
-        </p>
-      </footer>
+      <footer className="bg-neutral-950 text-gray-300 mt-24">
+  <div className="max-w-7xl mx-auto px-6 py-16">
 
+    <div className="grid md:grid-cols-4 gap-12">
+
+      {/* Brand */}
+      <div>
+        <h3 className="text-2xl font-bold text-white mb-4">
+          Valuted Kicks
+        </h3>
+        <p className="text-sm text-gray-400 leading-relaxed">
+          Professional Meeting Cost Calculator helping businesses
+          estimate the real financial impact of meetings instantly.
+        </p>
+      </div>
+
+      {/* Product */}
+      <div>
+        <h4 className="text-white font-semibold mb-4">Product</h4>
+        <ul className="space-y-3 text-sm">
+          <li>
+            <a href="/" className="hover:text-white transition">
+              Meeting Calculator
+            </a>
+          </li>
+          <li>
+            <a href="/#how-it-works" className="hover:text-white transition">
+              How It Works
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Company */}
+      <div>
+        <h4 className="text-white font-semibold mb-4">Company</h4>
+        <ul className="space-y-3 text-sm">
+          <li>
+            <a href="/privacy" className="hover:text-white transition">
+              Privacy Policy
+            </a>
+          </li>
+          <li>
+            <a href="/terms" className="hover:text-white transition">
+              Terms of Service
+            </a>
+          </li>
+          <li>
+            <a href="/contact" className="hover:text-white transition">
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      {/* Legal */}
+      <div>
+        <h4 className="text-white font-semibold mb-4">Legal</h4>
+        <p className="text-sm text-gray-400 leading-relaxed">
+          This tool provides cost estimations for informational
+          purposes only. Results may vary depending on real-world
+          conditions and compensation structures.
+        </p>
+      </div>
+
+    </div>
+
+    <div className="border-t border-neutral-800 mt-12 pt-8 text-center text-sm text-gray-500">
+      <p>
+        Powered by <span className="text-white font-semibold">Valuted Kicks</span>
+      </p>
+      <p className="mt-2">
+        © 2026 Valuted Kicks. All rights reserved.
+      </p>
+    </div>
+
+  </div>
+</footer>
     </main>
   );
 }
