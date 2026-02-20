@@ -1,0 +1,30 @@
+export default function PrivacyPage() {
+  return (
+    <main className="max-w-4xl mx-auto px-6 py-20">
+      <h1 className="text-4xl font-bold mb-8">Privacy Policy</h1>
+
+      <p className="mb-6 text-gray-600">
+        Valued News respects your privacy. This website collects minimal
+        information necessary to improve user experience.
+      </p>
+
+      <h2 className="text-2xl font-semibold mt-10 mb-4">
+        Information We Collect
+      </h2>
+      <p className="text-gray-600 mb-6">
+        We may collect anonymous analytics data and advertising cookies.
+      </p>
+
+      <h2 className="text-2xl font-semibold mt-10 mb-4">
+        Advertising
+      </h2>
+      <p className="text-gray-600">
+        Third-party ad networks may use cookies to personalize ads.
+      </p>
+
+      <p className="mt-12 text-sm text-gray-500">
+        © 2026 Valued News. All rights reserved.
+      </p>
+    </main>
+  );
+}
