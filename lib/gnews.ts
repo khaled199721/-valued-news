@@ -1,16 +1,26 @@
-export async function getTopNews(category?: string) {
-  const apiKey = process.env.GNEWS_API_KEY;
+const API_KEY = process.env.GNEWS_API_KEY;
 
-  const url = `https://gnews.io/api/v4/top-headlines?lang=en${
-    category ? `&topic=${category}` : ""
-  }&max=12&apikey=${apiKey}`;
-
-  const res = await fetch(url, { next: { revalidate: 1800 } });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch news");
+export async function getTopNews() {
+  if (!API_KEY) {
+    console.error("Missing GNEWS_API_KEY");
+    return [];
   }
 
-  const data = await res.json();
-  return data.articles || [];
+  try {
+    const res = await fetch(
+      `https://gnews.io/api/v4/top-headlines?lang=en&max=10&token=${API_KEY}`,
+      { cache: "no-store" }
+    );
+
+    if (!res.ok) {
+      console.error("GNews error:", await res.text());
+      return [];
+    }
+
+    const data = await res.json();
+    return data.articles || [];
+  } catch (error) {
+    console.error("Fetch failed:", error);
+    return [];
+  }
 }

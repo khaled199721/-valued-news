@@ -1,55 +1,78 @@
-Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
-Error: Failed to fetch news
-    at c (.next/server/chunks/ssr/[root-of-the-server]__5f0b8324._.js:1:514)
-    at async d (.next/server/chunks/ssr/[root-of-the-server]__5f0b8324._.js:1:601) {
-  digest: '3699910793'
-}
-Export encountered an error on /page: /, exiting the build.
-⨯ Next.js build worker exited with code: 1 and signal: null
-Error: Command "npm run build" exited with 1
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 import { getTopNews } from "@/lib/gnews";
 import Link from "next/link";
 
 export default async function Home() {
-  const articles = await getTopNews("general");
-
-  const hero = articles[0];
-  const rest = articles.slice(1);
+  const articles = await getTopNews();
 
   return (
-    <main className="container">
-      {/* HERO SECTION */}
-      {hero && (
-        <Link
-          href={`/article/${encodeURIComponent(hero.title)}`}
-          className="hero"
-        >
-          {hero.image && <img src={hero.image} alt={hero.title} />}
-          <div className="hero-text">
-            <h1>{hero.title}</h1>
-            <p>{hero.description}</p>
-          </div>
-        </Link>
+    <main className="max-w-7xl mx-auto px-4 py-8">
+
+      {/* ===== HERO SECTION ===== */}
+      {articles.length > 0 && (
+        <section className="mb-10">
+          <Link href={`/article/${encodeURIComponent(articles[0].url)}`}>
+            <div className="cursor-pointer">
+              {articles[0].image && (
+                <img
+                  src={articles[0].image}
+                  alt={articles[0].title}
+                  className="w-full h-[400px] object-cover rounded-xl"
+                />
+              )}
+              <h1 className="text-3xl md:text-4xl font-bold mt-4">
+                {articles[0].title}
+              </h1>
+              <p className="text-gray-600 mt-2">
+                {articles[0].description}
+              </p>
+            </div>
+          </Link>
+        </section>
       )}
 
-      {/* AD */}
-      <div className="ad-banner">Advertisement</div>
-
-      {/* GRID */}
-      <div className="grid">
-        {rest.map((article: any, index: number) => (
+      {/* ===== GRID SECTION ===== */}
+      <section className="grid md:grid-cols-3 gap-6">
+        {articles.slice(1).map((article, index) => (
           <Link
             key={index}
-            href={`/article/${encodeURIComponent(article.title)}`}
-            className="card"
+            href={`/article/${encodeURIComponent(article.url)}`}
           >
-            {article.image && (
-              <img src={article.image} alt={article.title} />
-            )}
-            <h2>{article.title}</h2>
+            <div className="cursor-pointer border rounded-lg overflow-hidden hover:shadow-lg transition">
+              {article.image && (
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full h-48 object-cover"
+                />
+              )}
+              <div className="p-4">
+                <h2 className="font-semibold text-lg">
+                  {article.title}
+                </h2>
+                <p className="text-sm text-gray-600 mt-2">
+                  {article.description}
+                </p>
+              </div>
+            </div>
           </Link>
         ))}
-      </div>
+      </section>
+
+      {/* ===== EMPTY STATE ===== */}
+      {articles.length === 0 && (
+        <div className="text-center py-20">
+          <h2 className="text-2xl font-semibold">
+            No news available right now.
+          </h2>
+          <p className="text-gray-500 mt-2">
+            Please check your GNews API key or try again later.
+          </p>
+        </div>
+      )}
+
     </main>
   );
 }
