@@ -1,96 +1,119 @@
-export default function Home() {
+export const revalidate = 3600;
+
+async function getNews() {
+  const res = await fetch(
+    `https://gnews.io/api/v4/top-headlines?category=general&lang=en&country=us&max=10&apikey=${process.env.GNEWS_API_KEY}`
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch news");
+  }
+
+  const data = await res.json();
+  return data.articles;
+}
+
+export default async function Home() {
+  const articles = await getNews();
+
+  const featured = articles[0];
+  const secondary = articles.slice(1, 5);
+  const headlines = articles.slice(5, 10);
+
   return (
     <main className="min-h-screen bg-white text-black">
 
-      {/* Navigation */}
-      <nav className="w-full border-b border-gray-100 bg-white">
-        <div className="max-w-7xl mx-auto px-8 py-6 flex justify-between items-center">
-          <div className="text-2xl font-extrabold tracking-[0.2em]">
-            VALUED
-          </div>
+      {/* TOP BAR */}
+      <div className="bg-black text-white text-center py-2 text-sm tracking-wide">
+        BREAKING NEWS • Updated Hourly
+      </div>
 
-          <div className="space-x-12 text-sm font-medium tracking-widest uppercase">
-            <a className="hover:opacity-60 transition">News</a>
-            <a className="hover:opacity-60 transition">Releases</a>
-            <a className="hover:opacity-60 transition">Culture</a>
-            <a className="hover:opacity-60 transition">About</a>
-          </div>
+      {/* HEADER */}
+      <header className="border-b py-8 text-center">
+        <h1 className="text-6xl font-extrabold tracking-tight">
+          VALUED NEWS
+        </h1>
+      </header>
+
+      {/* MAIN SECTION */}
+      <section className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-10">
+
+        {/* FEATURED ARTICLE */}
+        <div className="md:col-span-2">
+          {featured?.image && (
+            <img
+              src={featured.image}
+              alt={featured.title}
+              className="w-full h-[450px] object-cover mb-6"
+            />
+          )}
+
+          <h2 className="text-4xl font-bold mb-4 leading-tight">
+            {featured.title}
+          </h2>
+
+          <p className="text-gray-600 mb-6">
+            {featured.description}
+          </p>
+
+          <a
+            href={featured.url}
+            target="_blank"
+            className="text-red-600 font-semibold"
+          >
+            Read Full Story →
+          </a>
         </div>
-      </nav>
 
-      {/* Hero */}
-      <section className="max-w-7xl mx-auto px-8 py-32">
-        <div className="max-w-4xl">
-          <p className="text-xs tracking-[0.4em] uppercase text-gray-400 mb-6">
-            Independent Sneaker Authority
-          </p>
-
-          <h1 className="text-8xl font-black leading-[0.95] tracking-tight mb-8">
-            VALUED NEWS
-          </h1>
-
-          <p className="text-xl text-gray-600 max-w-2xl leading-relaxed">
-            A premium digital publication covering sneaker culture,
-            streetwear innovation, and the evolving intersection of fashion and identity.
-          </p>
+        {/* SIDEBAR HEADLINES */}
+        <div className="space-y-6 border-l pl-6">
+          {secondary.map((article: any, index: number) => (
+            <div key={index} className="border-b pb-4">
+              <h3 className="font-semibold text-lg mb-2">
+                {article.title}
+              </h3>
+              <a
+                href={article.url}
+                target="_blank"
+                className="text-sm text-red-600"
+              >
+                Read →
+              </a>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* Featured Story */}
-      <section className="border-t border-gray-100">
-        <div className="max-w-7xl mx-auto px-8 py-24 grid md:grid-cols-2 gap-20 items-center">
-          
-          <div>
-            <p className="text-xs tracking-[0.3em] uppercase text-gray-400 mb-6">
-              Featured Story
-            </p>
+      {/* MORE NEWS GRID */}
+      <section className="max-w-7xl mx-auto px-6 pb-20">
+        <h2 className="text-2xl font-bold mb-8 border-b pb-2">
+          MORE HEADLINES
+        </h2>
 
-            <h2 className="text-5xl font-bold mb-8 leading-tight">
-              Nike Unveils the Future of Air Jordan Design
-            </h2>
+        <div className="grid md:grid-cols-4 gap-8">
+          {headlines.map((article: any, index: number) => (
+            <div key={index}>
+              {article.image && (
+                <img
+                  src={article.image}
+                  alt={article.title}
+                  className="w-full h-40 object-cover mb-3"
+                />
+              )}
 
-            <p className="text-lg text-gray-600 leading-relaxed">
-              A new era of performance engineering meets heritage storytelling.
-              This launch sets a new benchmark for sneaker innovation in 2026.
-            </p>
-          </div>
+              <h4 className="font-semibold text-sm mb-2">
+                {article.title}
+              </h4>
 
-          <div className="h-[400px] bg-gray-100 rounded-3xl"></div>
-
-        </div>
-      </section>
-
-      {/* Article Grid */}
-      <section className="max-w-7xl mx-auto px-8 py-28">
-        <div className="grid md:grid-cols-3 gap-16">
-
-          <div>
-            <h3 className="text-2xl font-semibold mb-4">
-              Adidas Reinvents Sustainability
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              A deeper commitment to eco-forward materials reshaping performance footwear.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-2xl font-semibold mb-4">
-              The Rise of Independent Street Labels
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              Underground brands capturing global attention through authenticity.
-            </p>
-          </div>
-
-          <div>
-            <h3 className="text-2xl font-semibold mb-4">
-              Inside the Sneaker Resale Economy
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              Data, scarcity, and digital marketplaces redefining sneaker value.
-            </p>
-          </div>
-
+              <a
+                href={article.url}
+                target="_blank"
+                className="text-xs text-red-600"
+              >
+                Read →
+              </a>
+            </div>
+          ))}
         </div>
       </section>
 

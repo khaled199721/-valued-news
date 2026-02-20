@@ -1,20 +1,9 @@
 import "./globals.css";
-import { Playfair_Display, Inter } from "next/font/google";
-
-const playfair = Playfair_Display({
-  subsets: ["latin"],
-  weight: ["400", "700", "900"],
-  variable: "--font-playfair",
-});
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-});
+import Script from "next/script";
 
 export const metadata = {
   title: "Valued News",
-  description: "Premium Sneaker & Streetwear Coverage",
+  description: "Real-Time Global Headlines Updated Hourly",
 };
 
 export default function RootLayout({
@@ -23,9 +12,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${inter.variable}`}>
-      <body className="font-sans bg-white text-black">
+    <html lang="en">
+      <body className="bg-white text-black">
+
         {children}
+
+        {/* Adstra Script */}
+        <Script
+          src="https://pl28749930.effectivegatecpm.com/30/b2/dd/30b2ddd5841c7a135d3feff4ba662b42.js"
+          strategy="afterInteractive"
+        />
+
       </body>
     </html>
   );
