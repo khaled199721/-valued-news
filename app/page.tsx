@@ -1,3 +1,12 @@
+Error occurred prerendering page "/". Read more: https://nextjs.org/docs/messages/prerender-error
+Error: Failed to fetch news
+    at c (.next/server/chunks/ssr/[root-of-the-server]__5f0b8324._.js:1:514)
+    at async d (.next/server/chunks/ssr/[root-of-the-server]__5f0b8324._.js:1:601) {
+  digest: '3699910793'
+}
+Export encountered an error on /page: /, exiting the build.
+⨯ Next.js build worker exited with code: 1 and signal: null
+Error: Command "npm run build" exited with 1
 import { getTopNews } from "@/lib/gnews";
 import Link from "next/link";
 
