@@ -1,4 +1,30 @@
 import "./globals.css";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  metadataBase: new URL("https://valutedkicks.com"),
+  title: {
+    default: "Valuted News | Global Headlines Updated Hourly",
+    template: "%s | Valuted News",
+  },
+  description:
+    "Valuted News delivers real-time global headlines across business, technology, sports, health, science and more.",
+  verification: {
+    google: "Ibog2p_EheZizdxb2gk08XlWf7mC_do5gmXQriAkLVA",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}`import "./globals.css";
 import Script from "next/script";
 
 export const metadata = {
