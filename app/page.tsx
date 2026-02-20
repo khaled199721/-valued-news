@@ -110,23 +110,11 @@ export default async function Home({
           Valuted Kicks
         </h3>
         <p className="text-sm text-gray-400 leading-relaxed">
-          Professional Meeting Cost Calculator helping businesses
-          estimate the real financial impact of meetings instantly.
+         
         </p>
       </div>
 
-      {/* Product */}
-      <div>
-        <h4 className="text-white font-semibold mb-4">Product</h4>
-        <ul className="space-y-3 text-sm">
-          <li>
-            <a href="/" className="hover:text-white transition">
-              Meeting Calculator
-            </a>
-          </li>
-          <li>
-            <a href="/#how-it-works" className="hover:text-white transition">
-              How It Works
+      {
             </a>
           </li>
         </ul>
@@ -158,9 +146,7 @@ export default async function Home({
       <div>
         <h4 className="text-white font-semibold mb-4">Legal</h4>
         <p className="text-sm text-gray-400 leading-relaxed">
-          This tool provides cost estimations for informational
-          purposes only. Results may vary depending on real-world
-          conditions and compensation structures.
+          
         </p>
       </div>
 
