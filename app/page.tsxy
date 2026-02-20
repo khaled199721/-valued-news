@@ -1,0 +1,22 @@
+export default function Home() {
+  return (
+    <main style={{ padding: "40px", fontFamily: "Arial, sans-serif" }}>
+      <h1 style={{ fontSize: "36px", fontWeight: "bold" }}>
+        Valuted News
+      </h1>
+
+      <p style={{ marginTop: "15px", fontSize: "18px" }}>
+        Real-Time Global Headlines Updated Hourly.
+      </p>
+
+      <div style={{ marginTop: "40px" }}>
+        <h2>Latest Updates</h2>
+        <ul style={{ marginTop: "10px" }}>
+          <li>Breaking News Example 1</li>
+          <li>Breaking News Example 2</li>
+          <li>Breaking News Example 3</li>
+        </ul>
+      </div>
+    </main>
+  );
+}

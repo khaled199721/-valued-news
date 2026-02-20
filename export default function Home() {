@@ -1,0 +1,10 @@
+  return (
+    <main style={{ padding: "40px" }}>
+      <h1 style={{ fontSize: "32px", fontWeight: "bold" }}>
+        Valuted News
+      </h1>
+      <p style={{ marginTop: "10px" }}>
+        Real-Time Global Headlines Updated Hourly.
+      </p>
+    </main>
+  );
